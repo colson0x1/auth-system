@@ -15,17 +15,17 @@ const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
   // See if the user ID in the payload exists in our database
   // If it does, call 'done' with that user
   // Otherwise, call done without a user object
-  User.findById(payload.sub, function (err, user) {
-    if (err) {
-      return done(err, false);
-    }
-
-    if (user) {
-      done(null, user);
-    } else {
-      done(null, false);
-    }
-  });
+  User.findById(payload.sub)
+    .then((user) => {
+      if (user) {
+        done(null, user);
+      } else {
+        done(null, false);
+      }
+    })
+    .catch((err) => {
+      done(err, false);
+    });
 });
 
 // Tell passport to use this Strategy
