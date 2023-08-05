@@ -1,5 +1,10 @@
 import React from 'react';
+import Header from './Header';
 
 export default () => {
-  return <div>Scalable Auth System</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
